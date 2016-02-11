@@ -16,124 +16,357 @@
 #     -- Also remember to restart the snapdrive daemon by issuing 'snapdrived restart'
 #
 #
-#PATH="/etc/vx/bin:/sbin:/usr/sbin:/bin:/usr/bin:" #toolset search path
-#all-access-if-rbac-unspecified="on" #Allows access to all filer operations if the RBAC permissions file is missing in filer volume
-#allow-partial-clone-connect="off" #Allows to connect to a subset of file system or host volume of the cloned diskgroup
-#audit-log-file="/var/log/sd-audit.log" #Audit Log File Path
-#audit-log-max-size=20480 #Maximum size (in bytes) of audit log file
-#audit-log-save=2 #Number of historical audit log file to save
-#autosupport-enabled="on" #Enable autosupport messages to be sent to the configured Storage System(s)
-#available-lun-reserve=8 #Number of LUNs for which to reserve host resources
-#blacklist-interfaces="" #Ignore interfaces in the blacklist list
-#bypass-snapdrive-clone-generated-check="off" #Deletes volume clone eventhough if it is not snapdrive-generated
-#check-export-permission-nfs-clone="on" #Checks if the host has nfs export permissions for resource being connected
-#client-trace-log-file="/var/log/sd-client-trace.log" #client trace log file (Probably never used or useful)
-#cluster-operation-timeout-secs=600 #Cluster Operation timeout in seconds (Useful only on SFRAC Environments). Increase this value if you frequent failures in SFRAC environments
-#contact-http-dfm-port=8088 #HTTP server port to contact to access the DFM (Change this only if you have modified DFM Server settings)
-#contact-http-port=80 #HTTP port to contact to access the filer (This should not be changed most of the time)
-#contact-http-port-sdu-daemon=4094 #HTTP port on which sdu daemon will bind
-#contact-https-port-sdu-daemon=4095 #HTTPS port on which sdu daemon will bind
-#contact-ssl-dfm-port=8488 #SSL server port to contact to access the DFM
-#contact-ssl-port=443 #SSL port to contact to access the filer
-#contact-viadmin-port=8043 #HTTP/HTTPS port to contact to access the virtual interface admin
-#daemon-trace-log-file="/var/log/sd-daemon-trace.log" #daemon trace log file
-#datamotion-cutover-wait=120 #Wait time in seconds during data motion
-#default-noprompt="off" #A default value for -noprompt option in the command line
-#default-transport="iscsi" #Transport type to use for storage provisioning, when a decision is needed
-#deferred-logical-volume-start="off" #Enable to start the volume in background
-#device-retries=3 #Number of retries on Ontap filer LUN device inquiry (This is no longer useful or used)
-#device-retry-sleep-secs=1 #Number of seconds between Ontap filer LUN device inquiry retries (This is no longer useful or used)
-#dfm-api-timeout=180 #Timeout in seconds for calling DFM API
-#dfm-rbac-retries=12 #Number of access retries until DFM Refreshes (Increase this value if DFM is unable to discover newly created Volumes)
-#dfm-rbac-retry-sleep-secs=15 #Number of seconds between DFM rbac access retries(Increase this value if DFM is unable to discover the Volume)
-#do-lunclone="on" #Lunclone for Dataset mount_backup if readonly qtree is detected
-#enable-alua="on" #Enable ALUA for the igroup
-#enable-fcp-cache="on" #Enable FCP Cache in Assistants
-#enable-implicit-host-preparation="on" #Enable implicit host preparation for LUN creation
-#enable-migrate-nfs-version="off" #Enable snap connect or restore to use higher version of NFS version when NFS version used during snapshot currently is not enabled on the storage system
-#enable-mount-with-netdev="off" #Adds the _netdev file system option while mounting for iscsi transport protocol in Linux environment.
-#enable-mountguard-support="off" #Enable mountguard support (Useful only in AIX environments)
-#enable-parallel-operations="on" #Enable support for parallel operations
-#enable-ping-to-check-filer-reachability="on" #Use Ping Method to check the filer is responding or not
-#enable-split-clone="off" #Enable split clone volume or lun during connnect/disconnect
-#enforce-strong-ciphers="off" #SDU daemon will enforce TLSv1 and strong ciphers
-#filer-restore-retries=1440 #Number of retries while doing lun restore
-#filer-restore-retry-sleep-secs=15 #Number of secs between retries while restoring lun
-#filesystem-freeze-timeout-secs=300 #File system freeze timeout in seconds
-#flexclone-writereserve-enabled="off" #Enable space reservations during FlexClone creation
-#fstype="ext3" #File system to use when more than one file system is available
-#igroup-file="/opt/NetApp/snapdrive/.igroupfile" #location of igroup configuration file
-#loadsharing-update-sleep-interval=30 #Number of seconds SnapDrive for UNIX waits after load-sharing volume is updated.
-#lun-onlining-in-progress-retries=40 #Number of retries when lun onlining in progress after VBSR
-#lun-onlining-in-progress-sleep-secs=3 #Number of secs between retries when lun onlining in progress after VBSR
-#lunpath-monitor-frequency=24 #Number of hours after which SnapDrive for UNIX automatically fix path for LUNs.
-#mgmt-retries=2 #Number of retries on ManageONTAP control channel
-#mgmt-retry-sleep-long-secs=90 #Number of seconds between retries on ManageONTAP control channel (failover error)
-#mgmt-retry-sleep-secs=2 #Number of seconds between retries on ManageONTAP control channel
-#migrate-file="/opt/NetApp/snapdrive/.migfile" #Location of Migrate File
-#multipathing-type="none" #Multipathing software to use when more than one multipathing solution is available. Possible values are 'NativeMPIO' or 'DMP' or 'none'
-#override-vbsr-snapmirror-check="off" #If DFM is not configured, makes VBSR snapmirror check an overridable check.This may disrupt SnapMirror relationship when snapshot to be restored is older than SnapMirror baseline snapshot. This configuration variable is not applicable for Clustered Data ONTAP 8.2 and above
-#override-vbsr-snapvault-check="off" #If DFM is not configured, makes VBSR snapvault check an overridable check.This may disrupt SnapVault relationship when snapshot to be restored is older than SnapVault baseline snapshot. This configuration variable is applicable to Data ONTAP 7-Mode only
-#password-file="/opt/NetApp/snapdrive/.pwfile" #location of password file
-#ping-interfaces-with-same-octet="off" #SDU only pings through host interface which has first 3 octets of IPV4 in common with filer interface
-#portset-file="/opt/NetApp/snapdrive/.portset" #location of portset configuration file
-#prefix-clone-name="" #Prefix string for naming FlexClone
-#prefix-filer-lun="" #Prefix for all filer LUN names internally generated by storage create
-#prepare-lun-count=16 #Number of LUNs for which to request host preparation
-#rbac-cache="off" #Use RBAC cache when all DFM servers are down. Active only when rbac-method is dfm.
-#rbac-cache-timeout=24 #Number of hours the RBAC cache is valid
-#rbac-method="native" #Role Based Access Control(RBAC) methods
-#recovery-log-file="/var/log/sd-recovery.log" #recovery log file
-#recovery-log-save=20 #Number of old copies of recovery log file to save
-#san-clone-method="lunclone" #Clone methods for snap connect: unrestricted, optimal or lunclone
-#sdu-daemon-certificate-path="/opt/NetApp/snapdrive/snapdrive.pem" #location of https server certificate
-#sdu-password-file="/opt/NetApp/snapdrive/.sdupw" #location of SDU Daemon and DFM password file
-#secure-communication-among-cluster-nodes="off" #Enable Secure Communication (Useful only on SFRAC environments)
-#sfsr-polling-frequency=10 #Sleep for the given amount of seconds before attempting SFSR
-#snapconnect-nfs-removedirectories="off" #NFS snap connect cleaup unwanted dirs;
-#snapcreate-cg-timeout="relaxed" #Timeout type used in snapshot creation with Consitency Groups.
-#snapcreate-check-nonpersistent-nfs="on" #Check that entries exist in persistent filesystem file for specified nfs fs.
-#snapcreate-consistency-retries=3 #Number of retries on best-effort snapshot consistency check failure
-#snapcreate-consistency-retry-sleep=1 #Number of seconds between best-effort snapshot consistency retries
-#snapcreate-must-make-snapinfo-on-qtree="off" #snap create must be able to create snapinfo on qtree
-#snapdelete-delete-rollback-with-snap="off" #Delete all rollback snapshots related to specified snapshot
-#snapmirror-dest-snap-support-enabled="on" #Enables snap restore and snap connect commands to deal with snapshots which were moved to another filer volume (e.g. via SnapMirror)
-#snaprestore-delete-rollback-after-restore="on" #Delete rollback snapshot after a successfull restore
-#snaprestore-make-rollback="on" #Create snap rollback before restore
-#snaprestore-must-make-rollback="on" #Do not continue 'snap restore' if rollback creation fails
-#snaprestore-snapmirror-check="on" #Enable snapmirror destination volume check in snap restore
-#space-reservations-enabled="on" #Enable space reservations when creating new luns
-#space-reservations-volume-enabled="snapshot" #Enable space reservation over volume.
-#trace-enabled="on" #Enable trace
-#trace-level=7 #Trace levels: 1=FatalError; 2=AdminError; 3=CommandError; 4=warning, 5=info, 6=verbose, 7=full
-#trace-log-file="/var/log/sd-trace.log" #trace log file
-#trace-log-max-size=10485760 #Maximum size of trace log file in bytes; 0 means one trace log file per command
-#trace-log-save=100 #Number of old copies of trace log file to save
-#use-efi-label="off" #Enables use of EFI labels on Solaris which is required for lun size > 1 TB
-#use-https-to-dfm="on" #Communication with DFM done via HTTPS instead of HTTP
-#use-https-to-filer="on" #Communication with filer done via HTTPS instead of HTTP
-#use-https-to-sdu-daemon="off" #Communication with daemon done via HTTPS instead of HTTP
-#use-https-to-viadmin="on" #Specifies if HTTPS must be used to communicate with SMVI Product
-#vif-password-file="/opt/NetApp/snapdrive/.vifpw" #location of Virtual Interface Server password file
-#virtualization-operation-timeout-secs=600 #Virtualization Operation timeout in seconds
-#vmtype="lvm" #Volume manager to use when more than one volume manager is available
-#vol-restore="off" #Method of restoring a volume. Possible values execute, preview and off
-#volmove-cutover-retry=3 #Number of retries during volume migration
-#volmove-cutover-retry-sleep=3 #Number of seconds between retries during volume migration cutover phase
-#volume-clone-retry=3 #Number of retries during flex-clone create
-#volume-clone-retry-sleep=3 #Number of seconds between retries during flex-clone create
-#volume-destroy-retry=5 #Number of retries during volume destroy in case of jumpahead
-#volume-destroy-retry-sleep=3 #Number of seconds between retries during volume destroy in case of jumpahead
-#volume-offline-retry=3 #Number of retries during volume offline. Data ONTAP 7-Mode only
-#volume-offline-retry-sleep=3 #Number of seconds between retries during volume-offline. Data ONTAP 7-Mode only
-# BASLER UPDATES
-ping-interfaces-with-same-octet="<%= @ping_interfaces_with_same_octet %>" #SDU only pings through host interface which has first 3 octets of IPV4 in common with filer interface
-snapcreate-check-nonpersistent-nfs="<%= @snapcreate_check_nonpersistent_nfs %>" #Check that entries exist in persistent filesystem file for specified nfs fs.
+<%- if @PATH -%>
+PATH="<%= @PATH %>" #toolset search path
+<%- end -%>
+<%- if @all_access_if_rbac_unspecified -%>
+all-access-if-rbac-unspecified="<%= @all_access_if_rbac_unspecified %>" #Allows access to all filer operations if the RBAC permissions file is missing in filer volume
+<%- end -%>
+<%- if @allow_partial_clone_connect -%>
+allow-partial-clone-connect="<%= @allow_partial_clone_connect %>" #Allows to connect to a subset of file system or host volume of the cloned diskgroup
+<%- end -%>
+<%- if @audit_log_file -%>
 audit-log-file="<%= @audit_log_file %>" #Audit Log File Path
+<%- end -%>
+<%- if @audit_log_max_size -%>
+audit-log-max-size=<%= @audit_log_max_size %> #Maximum size (in bytes) of audit log file
+<%- end -%>
+<%- if @audit_log_save -%>
+audit-log-save=<%= @audit_log_save %> #Number of historical audit log file to save
+<%- end -%>
+<%- if @autosupport_enabled -%>
+autosupport-enabled="<%= @autosupport_enabled %>" #Enable autosupport messages to be sent to the configured Storage System(s)
+<%- end -%>
+<%- if @available_lun_reserve -%>
+available-lun-reserve=<%= @available_lun_reserve %> #Number of LUNs for which to reserve host resources
+<%- end -%>
+<%- if @blacklist_interfaces -%>
+blacklist-interfaces="<%= @blacklist_interfaces %>" #Ignore interfaces in the blacklist list
+<%- end -%>
+<%- if @bypass_snapdrive_clone_generated_check -%>
+bypass-snapdrive-clone-generated-check="<%= @bypass_snapdrive_clone_generated_check %>" #Deletes volume clone eventhough if it is not snapdrive-generated
+<%- end -%>
+<%- if @check_export_permission_nfs_clone -%>
+check-export-permission-nfs-clone="<%= @check_export_permission_nfs_clone %>" #Checks if the host has nfs export permissions for resource being connected
+<%- end -%>
+<%- if @client_trace_log_file -%>
 client-trace-log-file="<%= @client_trace_log_file %>" #client trace log file (Probably never used or useful)
+<%- end -%>
+<%- if @cluster_operation_timeout_secs -%>
+cluster-operation-timeout-secs=<%= @cluster_operation_timeout_secs %> #Cluster Operation timeout in seconds (Useful only on SFRAC Environments). Increase this value if you frequent failures in SFRAC environments
+<%- end -%>
+<%- if @contact_http_dfm_port -%>
+contact-http-dfm-port=<%= @contact_http_dfm_port %> #HTTP server port to contact to access the DFM (Change this only if you have modified DFM Server settings)
+<%- end -%>
+<%- if @contact_http_port -%>
+contact-http-port=<%= @contact_http_port %> #HTTP port to contact to access the filer (This should not be changed most of the time)
+<%- end -%>
+<%- if @contact_http_port_sdu_daemon -%>
+contact-http-port-sdu-daemon=<%= @contact_http_port_sdu_daemon %> #HTTP port on which sdu daemon will bind
+<%- end -%>
+<%- if @contact_https_port_sdu_daemon -%>
+contact-https-port-sdu-daemon=<%= @contact_https_port_sdu_daemon %> #HTTPS port on which sdu daemon will bind
+<%- end -%>
+<%- if @contact_ssl_dfm_port -%>
+contact-ssl-dfm-port=<%= @contact_ssl_dfm_port %> #SSL server port to contact to access the DFM
+<%- end -%>
+<%- if @contact_ssl_port -%>
+contact-ssl-port=<%= @contact_ssl_port %> #SSL port to contact to access the filer
+<%- end -%>
+<%- if @contact_viadmin_port -%>
+contact-viadmin-port=<%= @contact_viadmin_port %> #HTTP/HTTPS port to contact to access the virtual interface admin
+<%- end -%>
+<%- if @daemon_trace_log_file -%>
 daemon-trace-log-file="<%= @daemon_trace_log_file %>" #daemon trace log file
+<%- end -%>
+<%- if @datamotion_cutover_wait -%>
+datamotion-cutover-wait=<%= @datamotion_cutover_wait %> #Wait time in seconds during data motion
+<%- end -%>
+<%- if @default_noprompt -%>
+default-noprompt="<%= @default_noprompt %>" #A default value for -noprompt option in the command line
+<%- end -%>
+<%- if @default_transport -%>
+default-transport="<%= @default_transport %>" #Transport type to use for storage provisioning, when a decision is needed
+<%- end -%>
+<%- if @deferred_logical_volume_start -%>
+deferred-logical-volume-start="<%= @deferred_logical_volume_start %>" #Enable to start the volume in background
+<%- end -%>
+<%- if @device_retries -%>
+device-retries=<%= @device_retries %> #Number of retries on Ontap filer LUN device inquiry (This is no longer useful or used)
+<%- end -%>
+<%- if @device_retry_sleep_secs -%>
+device-retry-sleep-secs=<%= @device_retry_sleep_secs %> #Number of seconds between Ontap filer LUN device inquiry retries (This is no longer useful or used)
+<%- end -%>
+<%- if @dfm_api_timeout -%>
+dfm-api-timeout=<%= @dfm_api_timeout %> #Timeout in seconds for calling DFM API
+<%- end -%>
+<%- if @dfm_rbac_retries -%>
+dfm-rbac-retries=<%= @dfm_rbac_retries %> #Number of access retries until DFM Refreshes (Increase this value if DFM is unable to discover newly created Volumes)
+<%- end -%>
+<%- if @dfm_rbac_retry_sleep_secs -%>
+dfm-rbac-retry-sleep-secs=<%= @dfm_rbac_retry_sleep_secs %> #Number of seconds between DFM rbac access retries(Increase this value if DFM is unable to discover the Volume)
+<%- end -%>
+<%- if @do_lunclone -%>
+do-lunclone="<%= @do_lunclone %>" #Lunclone for Dataset mount_backup if readonly qtree is detected
+<%- end -%>
+<%- if @enable_alua -%>
+enable-alua="<%= @enable_alua %>" #Enable ALUA for the igroup
+<%- end -%>
+<%- if @enable_fcp_cache -%>
+enable-fcp-cache="<%= @enable_fcp_cache %>" #Enable FCP Cache in Assistants
+<%- end -%>
+<%- if @enable_implicit_host_preparation -%>
+enable-implicit-host-preparation="<%= @enable_implicit_host_preparation %>" #Enable implicit host preparation for LUN creation
+<%- end -%>
+<%- if @enable_migrate_nfs_version -%>
+enable-migrate-nfs-version="<%= @enable_migrate_nfs_version %>" #Enable snap connect or restore to use higher version of NFS version when NFS version used during snapshot currently is not enabled on the storage system
+<%- end -%>
+<%- if @enable_mount_with_netdev -%>
+enable-mount-with-netdev="<%= @enable_mount_with_netdev %>" #Adds the _netdev file system option while mounting for iscsi transport protocol in Linux environment.
+<%- end -%>
+<%- if @enable_mountguard_support -%>
+enable-mountguard-support="<%= @enable_mountguard_support %>" #Enable mountguard support (Useful only in AIX environments)
+<%- end -%>
+<%- if @enable_parallel_operations -%>
+enable-parallel-operations="<%= @enable_parallel_operations %>" #Enable support for parallel operations
+<%- end -%>
+<%- if @enable_ping_to_check_filer_reachability -%>
+enable-ping-to-check-filer-reachability="<%= @enable_ping_to_check_filer_reachability %>" #Use Ping Method to check the filer is responding or not
+<%- end -%>
+<%- if @enable_split_clone -%>
+enable-split-clone="<%= @enable_split_clone %>" #Enable split clone volume or lun during connnect/disconnect
+<%- end -%>
+<%- if @enforce_strong_ciphers -%>
+enforce-strong-ciphers="<%= @enforce_strong_ciphers %>" #SDU daemon will enforce TLSv1 and strong ciphers
+<%- end -%>
+<%- if @filer_restore_retries -%>
+filer-restore-retries=<%= @filer_restore_retries %> #Number of retries while doing lun restore
+<%- end -%>
+<%- if @filer_restore_retry_sleep_secs -%>
+filer-restore-retry-sleep-secs=<%= @filer_restore_retry_sleep_secs %> #Number of secs between retries while restoring lun
+<%- end -%>
+<%- if @filesystem_freeze_timeout_secs -%>
+filesystem-freeze-timeout-secs=<%= @filesystem_freeze_timeout_secs %> #File system freeze timeout in seconds
+<%- end -%>
+<%- if @flexclone_writereserve_enabled -%>
+flexclone-writereserve-enabled="<%= @flexclone_writereserve_enabled %>" #Enable space reservations during FlexClone creation
+<%- end -%>
+<%- if @fstype -%>
+fstype="<%= @fstype %>" #File system to use when more than one file system is available
+<%- end -%>
+<%- if @igroup_file -%>
+igroup-file="<%= @igroup_file %>" #location of igroup configuration file
+<%- end -%>
+<%- if @loadsharing_update_sleep_interval -%>
+loadsharing-update-sleep-interval=<%= @loadsharing_update_sleep_interval %> #Number of seconds SnapDrive for UNIX waits after load-sharing volume is updated.
+<%- end -%>
+<%- if @lun_onlining_in_progress_retries -%>
+lun-onlining-in-progress-retries=<%= @lun_onlining_in_progress_retries %> #Number of retries when lun onlining in progress after VBSR
+<%- end -%>
+<%- if @lun_onlining_in_progress_sleep_secs -%>
+lun-onlining-in-progress-sleep-secs=<%= @lun_onlining_in_progress_sleep_secs %> #Number of secs between retries when lun onlining in progress after VBSR
+<%- end -%>
+<%- if @lunpath_monitor_frequency -%>
+lunpath-monitor-frequency=<%= @lunpath_monitor_frequency %> #Number of hours after which SnapDrive for UNIX automatically fix path for LUNs.
+<%- end -%>
+<%- if @mgmt_retries -%>
+mgmt-retries=<%= @mgmt_retries %> #Number of retries on ManageONTAP control channel
+<%- end -%>
+<%- if @mgmt_retry_sleep_long_secs -%>
+mgmt-retry-sleep-long-secs=<%= @mgmt_retry_sleep_long_secs %> #Number of seconds between retries on ManageONTAP control channel (failover error)
+<%- end -%>
+<%- if @mgmt_retry_sleep_secs -%>
+mgmt-retry-sleep-secs=<%= @mgmt_retry_sleep_secs %> #Number of seconds between retries on ManageONTAP control channel
+<%- end -%>
+<%- if @migrate_file -%>
+migrate-file="<%= @migrate_file %>" #Location of Migrate File
+<%- end -%>
+<%- if @multipathing_type -%>
+multipathing-type="<%= @multipathing_type %>" #Multipathing software to use when more than one multipathing solution is available. Possible values are 'NativeMPIO' or 'DMP' or 'none'
+<%- end -%>
+<%- if @override_vbsr_snapmirror_check -%>
+override-vbsr-snapmirror-check="<%= @override_vbsr_snapmirror_check %>" #If DFM is not configured, makes VBSR snapmirror check an overridable check.This may disrupt SnapMirror relationship when snapshot to be restored is older than SnapMirror baseline snapshot. This configuration variable is not applicable for Clustered Data ONTAP 8.2 and above
+<%- end -%>
+<%- if @override_vbsr_snapvault_check -%>
+override-vbsr-snapvault-check="<%= @override_vbsr_snapvault_check %>" #If DFM is not configured, makes VBSR snapvault check an overridable check.This may disrupt SnapVault relationship when snapshot to be restored is older than SnapVault baseline snapshot. This configuration variable is applicable to Data ONTAP 7-Mode only
+<%- end -%>
+<%- if @password_file -%>
+password-file="<%= @password_file %>" #location of password file
+<%- end -%>
+<%- if @ping_interfaces_with_same_octet -%>
+ping-interfaces-with-same-octet="<%= @ping_interfaces_with_same_octet %>" #SDU only pings through host interface which has first 3 octets of IPV4 in common with filer interface
+<%- end -%>
+<%- if @portset_file -%>
+portset-file="<%= @portset_file %>" #location of portset configuration file
+<%- end -%>
+<%- if @prefix_clone_name -%>
+prefix-clone-name="<%= @prefix_clone_name %>" #Prefix string for naming FlexClone
+<%- end -%>
+<%- if @prefix_filer_lun -%>
+prefix-filer-lun="<%= @prefix_filer_lun %>" #Prefix for all filer LUN names internally generated by storage create
+<%- end -%>
+<%- if @prepare_lun_count -%>
+prepare-lun-count=<%= @prepare_lun_count %> #Number of LUNs for which to request host preparation
+<%- end -%>
+<%- if @rbac_cache -%>
+rbac-cache="<%= @rbac_cache %>" #Use RBAC cache when all DFM servers are down. Active only when rbac-method is dfm.
+<%- end -%>
+<%- if @rbac_cache_timeout -%>
+rbac-cache-timeout=<%= @rbac_cache_timeout %> #Number of hours the RBAC cache is valid
+<%- end -%>
+<%- if @rbac_method -%>
+rbac-method="<%= @rbac_method %>" #Role Based Access Control(RBAC) methods
+<%- end -%>
+<%- if @recovery_log_file -%>
 recovery-log-file="<%= @recovery_log_file %>" #recovery log file
+<%- end -%>
+<%- if @recovery_log_save -%>
+recovery-log-save=<%= @recovery_log_save %> #Number of old copies of recovery log file to save
+<%- end -%>
+<%- if @san_clone_method -%>
+san-clone-method="<%= @san_clone_method %>" #Clone methods for snap connect: unrestricted, optimal or lunclone
+<%- end -%>
+<%- if @sdu_daemon_certificate_path -%>
+sdu-daemon-certificate-path="<%= @sdu_daemon_certificate_path %>" #location of https server certificate
+<%- end -%>
+<%- if @sdu_password_file -%>
+sdu-password-file="<%= @sdu_password_file %>" #location of SDU Daemon and DFM password file
+<%- end -%>
+<%- if @secure_communication_among_cluster_nodes -%>
+secure-communication-among-cluster-nodes="<%= @secure_communication_among_cluster_nodes %>" #Enable Secure Communication (Useful only on SFRAC environments)
+<%- end -%>
+<%- if @sfsr_polling_frequency -%>
+sfsr-polling-frequency=<%= @sfsr_polling_frequency %> #Sleep for the given amount of seconds before attempting SFSR
+<%- end -%>
+<%- if @snapconnect_nfs_removedirectories -%>
+snapconnect-nfs-removedirectories="<%= @snapconnect_nfs_removedirectories %>" #NFS snap connect cleaup unwanted dirs;
+<%- end -%>
+<%- if @snapcreate_cg_timeout -%>
+snapcreate-cg-timeout="<%= @snapcreate_cg_timeout %>" #Timeout type used in snapshot creation with Consitency Groups.
+<%- end -%>
+<%- if @snapcreate_check_nonpersistent_nfs -%>
+snapcreate-check-nonpersistent-nfs="<%= @snapcreate_check_nonpersistent_nfs %>" #Check that entries exist in persistent filesystem file for specified nfs fs.
+<%- end -%>
+<%- if @snapcreate_consistency_retries -%>
+snapcreate-consistency-retries=<%= @snapcreate_consistency_retries %> #Number of retries on best-effort snapshot consistency check failure
+<%- end -%>
+<%- if @snapcreate_consistency_retry_sleep -%>
+snapcreate-consistency-retry-sleep=<%= @snapcreate_consistency_retry_sleep %> #Number of seconds between best-effort snapshot consistency retries
+<%- end -%>
+<%- if @snapcreate_must_make_snapinfo_on_qtree -%>
+snapcreate-must-make-snapinfo-on-qtree="<%= @snapcreate_must_make_snapinfo_on_qtree %>" #snap create must be able to create snapinfo on qtree
+<%- end -%>
+<%- if @snapdelete_delete_rollback_with_snap -%>
+snapdelete-delete-rollback-with-snap="<%= @snapdelete_delete_rollback_with_snap %>" #Delete all rollback snapshots related to specified snapshot
+<%- end -%>
+<%- if @snapmirror_dest_snap_support_enabled -%>
+snapmirror-dest-snap-support-enabled="<%= @snapmirror_dest_snap_support_enabled %>" #Enables snap restore and snap connect commands to deal with snapshots which were moved to another filer volume (e.g. via SnapMirror)
+<%- end -%>
+<%- if @snaprestore_delete_rollback_after_restore -%>
+snaprestore-delete-rollback-after-restore="<%= @snaprestore_delete_rollback_after_restore %>" #Delete rollback snapshot after a successfull restore
+<%- end -%>
+<%- if @snaprestore_make_rollback -%>
+snaprestore-make-rollback="<%= @snaprestore_make_rollback %>" #Create snap rollback before restore
+<%- end -%>
+<%- if @snaprestore_must_make_rollback -%>
+snaprestore-must-make-rollback="<%= @snaprestore_must_make_rollback %>" #Do not continue 'snap restore' if rollback creation fails
+<%- end -%>
+<%- if @snaprestore_snapmirror_check -%>
+snaprestore-snapmirror-check="<% @snaprestore_snapmirror_check %>" #Enable snapmirror destination volume check in snap restore
+<%- end -%>
+<%- if @space_reservations_enabled -%>
+space-reservations-enabled="<%= @space_reservations_enabled %>" #Enable space reservations when creating new luns
+<%- end -%>
+<%- if @space_reservations_volume_enabled -%>
+space-reservations-volume-enabled="<%= @space_reservations_volume_enabled %>" #Enable space reservation over volume.
+<%- end -%>
+<%- if @trace_enabled -%>
+trace-enabled="<%= @trace_enabled %>" #Enable trace
+<%- end -%>
+<%- if @trace_level -%>
+trace-level=<%= @trace_level %> #Trace levels: 1=FatalError; 2=AdminError; 3=CommandError; 4=warning, 5=info, 6=verbose, 7=full
+<%- end -%>
+<%- if @trace_log_file -%>
 trace-log-file="<%= @trace_log_file %>" #trace log file
+<%- end -%>
+<%- if @trace_log_max_size -%>
+trace-log-max-size=<%= @trace_log_max_size %> #Maximum size of trace log file in bytes; 0 means one trace log file per command
+<%- end -%>
+<%- if @trace_log_save -%>
+trace-log-save=<%= @trace_log_save %> #Number of old copies of trace log file to save
+<%- end -%>
+<%- if @use_efi_label -%>
+use-efi-label="<%= @use_efi_label %>" #Enables use of EFI labels on Solaris which is required for lun size > 1 TB
+<%- end -%>
+<%- if @use_https_to_dfm -%>
+use-https-to-dfm="<%= @use_https_to_dfm %>" #Communication with DFM done via HTTPS instead of HTTP
+<%- end -%>
+<%- if @use_https_to_filer -%>
+use-https-to-filer="<% @use_https_to_filer %>" #Communication with filer done via HTTPS instead of HTTP
+<%- end -%>
+<%- if @use_https_to_sdu_daemon -%>
+use-https-to-sdu-daemon="<% @use_https_to_sdu_daemon %>" #Communication with daemon done via HTTPS instead of HTTP
+<%- end -%>
+<%- if @use_https_to_viadmin -%>
+use-https-to-viadmin="<%= @use_https_to_viadmin %>" #Specifies if HTTPS must be used to communicate with SMVI Product
+<%- end -%>
+<%- if @vif_password_file -%>
+vif-password-file="<%= @vif_password_file %>" #location of Virtual Interface Server password file
+<%- end -%>
+<%- if @virtualization_operation_timeout_secs -%>
+virtualization-operation-timeout-secs=<%= @virtualization_operation_timeout_secs %> #Virtualization Operation timeout in seconds
+<%- end -%>
+<%- if @vmtype -%>
+vmtype="<%= @vmtype %>" #Volume manager to use when more than one volume manager is available
+<%- end -%>
+<%- if @vol_restore -%>
+vol-restore="<%= @vol_restore %>" #Method of restoring a volume. Possible values execute, preview and off
+<%- end -%>
+<%- if @volmove_cutover_retry -%>
+volmove-cutover-retry=<%= @volmove_cutover_retry %> #Number of retries during volume migration
+<%- end -%>
+<%- if @volmove_cutover_retry_sleep -%>
+volmove-cutover-retry-sleep=<%= @volmove_cutover_retry_sleep %> #Number of seconds between retries during volume migration cutover phase
+<%- end -%>
+<%- if @volume_clone_retry -%>
+volume-clone-retry=<%= @volume_clone_retry %> #Number of retries during flex-clone create
+<%- end -%>
+<%- if @volume_clone_retry_sleep -%>
+volume-clone-retry-sleep=<%= @volume_clone_retry_sleep %> #Number of seconds between retries during flex-clone create
+<%- end -%>
+<%- if @volume_destroy_retry -%>
+volume-destroy-retry=<%= @volume_destroy_retry %> #Number of retries during volume destroy in case of jumpahead
+<%- end -%>
+<%- if @volume_destroy_retry_sleep -%>
+volume-destroy-retry-sleep=<%= @volume_destroy_retry_sleep %> #Number of seconds between retries during volume destroy in case of jumpahead
+<%- end -%>
+<%- if @volume_offline_retry -%>
+volume-offline-retry=<%= @volume_offline_retry %> #Number of retries during volume offline. Data ONTAP 7-Mode only
+<%- end -%>
+<%- if @volume_offline_retry_sleep -%>
+volume-offline-retry-sleep=<%= @volume_offline_retry_sleep %> #Number of seconds between retries during volume-offline. Data ONTAP 7-Mode only
+<%- end -%>
+<%- if @ping_interfaces_with_same_octet -%>
+ping-interfaces-with-same-octet="<%= @ping_interfaces_with_same_octet %>" #SDU only pings through host interface which has first 3 octets of IPV4 in common with filer interface
+<%- end -%>
+<%- if @snapcreate_check_nonpersistent_nfs -%>
+snapcreate-check-nonpersistent-nfs="<%= @enapcreate_check_nonpersistent_nfs %>" #Check that entries exist in persistent filesystem file for specified nfs fs.
+<%- end -%>
+<%- if @audit_log_file -%>
+audit-log-file="<%= @audit_log_file %>" #Audit Log File Path
+<%- end -%>
+<%- if @client_trace_log_file -%>
+client-trace-log-file="<%= @client_trace_log_file %>" #client trace log file (Probably never used or useful)
+<%- end -%>
+<%- if @daemon_trace_log_file -%>
+daemon-trace-log-file="<%= @daemon_trace_log_file %>" #daemon trace log file
+<%- end -%>
+<%- if @recovery_log_file -%>
+recovery-log-file="<%= @recovery_log_file %>" #recovery log file
+<%- end -%>
+<%- if @trace_log_file -%>
+trace-log-file="<%= @trace_log_file %>" #trace log file
+<%- end -%>
 <%- if @check_export_permission_nfs_clone -%>
 check-export-permission-nfs-clone="<%= @check_export_permission_nfs_clone %>" #Checks if the host has nfs export permissions for resource being connected !!!!! NEU für C-MODE
 <%- end -%>

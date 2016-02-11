@@ -1,7 +1,7 @@
 require 'spec_helper'
-describe 'snapdrive' do
+describe 'snapdrived' do
 
   context 'with defaults for all parameters' do
-    it { should contain_class('snapdrive') }
+    it { should contain_class('snapdrived') }
   end
 end

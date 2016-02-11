@@ -1,6 +1,6 @@
-class snapdrive::config {
-  file { '/opt/NetApp/snapdrive/snapdrive.conf':
-    content => template('snapdrive/snapdrive.conf.erb'),
-    mode    => '0444',
+class snapdrived::config {
+  file { '/opt/NetApp/snapdrived/snapdrive.conf':
+    content => template('snapdrived/snapdrive.conf.erb'),
+    mode    => '0644',
   }
 }

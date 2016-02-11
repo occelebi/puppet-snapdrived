@@ -1,4 +1,4 @@
-class snapdrive::service {
+class snapdrived::service {
 
   service { 'snapdrived':
     enable    => true,
