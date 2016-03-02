@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Onur Cem Celebi",
   "summary": "Netapp snapdrived module",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "operatingsystem_support": [
     {
     "operatingsystem":"RedHat",
