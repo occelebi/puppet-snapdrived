@@ -15,6 +15,7 @@
 class snapdrived (
   $log_dir                                   = undef,
   $manage_log_dir                            = false,
+  $service_provider                          = undef,
   $path                                      = undef,
   $all_access_if_rbac_unspecified            = undef,
   $allow_partial_clone_connect               = undef,
@@ -131,10 +132,25 @@ class snapdrived (
     ensure => installed,
   }
 
+  # Create log file directory if we specify manage_log_dir
+  #
   if ( $manage_log_dir and $log_dir ) {
     file { $log_dir:
       ensure => directory,
       before => Service['snapdrived'],
+    }
+  }
+
+  # On RedHat 7 Snapdrive installs init scripts that fail to start using
+  # systemd.  We can set the service_provider parameter to explicitly tell
+  # puppet which provider to use, if left unset, it will revert to 'redhat'
+  # for RedHat/CentOS 7.0 based systems.
+  #
+  if ( !$service_provider ) {
+    if ( $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' ) {
+      $use_service_provider = 'redhat'
+    } else {
+      $use_service_provider = undef
     }
   }
 
@@ -148,6 +164,7 @@ class snapdrived (
   service { 'snapdrived':
     ensure    => running,
     enable    => true,
+    provider  => $use_service_provider,
     subscribe => File['/opt/NetApp/snapdrive/snapdrive.conf'],
   }
 
