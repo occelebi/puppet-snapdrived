@@ -131,7 +131,7 @@ class snapdrived (
     ensure => installed,
   }
 
-  if ( $manage_log_dir && $log_dir ) {
+  if ( $manage_log_dir and $log_dir ) {
     file { $log_dir:
       ensure => directory,
       before => Service['snapdrived'],
