@@ -122,14 +122,7 @@ class snapdrived (
   $volume_destroy_retry                      = undef,
   $volume_destroy_retry_sleep                = undef,
   $volume_offline_retry                      = undef,
-  $audit_log_file                            = undef,
-  $trace_log_file                            = undef,
-  $recovery_log_file                         = undef,
-  $client_trace_log_file                     = undef,
-  $daemon_trace_log_file                     = undef,
-  $ping_interfaces_with_same_octet           = undef,
-  $check_export_permission_nfs_clone         = undef,
-  $snapcreate_check_nonpersistent_nfs        = undef,
+  $volume_offline_retry_sleep                = undef,
 ){
 
   package { 'netapp.snapdrive':

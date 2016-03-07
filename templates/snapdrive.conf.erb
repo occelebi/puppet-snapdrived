@@ -346,27 +346,3 @@ volume-offline-retry=<%= @volume_offline_retry %> #Number of retries during volu
 <%- if @volume_offline_retry_sleep -%>
 volume-offline-retry-sleep=<%= @volume_offline_retry_sleep %> #Number of seconds between retries during volume-offline. Data ONTAP 7-Mode only
 <%- end -%>
-<%- if @ping_interfaces_with_same_octet -%>
-ping-interfaces-with-same-octet="<%= @ping_interfaces_with_same_octet %>" #SDU only pings through host interface which has first 3 octets of IPV4 in common with filer interface
-<%- end -%>
-<%- if @snapcreate_check_nonpersistent_nfs -%>
-snapcreate-check-nonpersistent-nfs="<%= @enapcreate_check_nonpersistent_nfs %>" #Check that entries exist in persistent filesystem file for specified nfs fs.
-<%- end -%>
-<%- if @audit_log_file -%>
-audit-log-file="<%= @audit_log_file %>" #Audit Log File Path
-<%- end -%>
-<%- if @client_trace_log_file -%>
-client-trace-log-file="<%= @client_trace_log_file %>" #client trace log file (Probably never used or useful)
-<%- end -%>
-<%- if @daemon_trace_log_file -%>
-daemon-trace-log-file="<%= @daemon_trace_log_file %>" #daemon trace log file
-<%- end -%>
-<%- if @recovery_log_file -%>
-recovery-log-file="<%= @recovery_log_file %>" #recovery log file
-<%- end -%>
-<%- if @trace_log_file -%>
-trace-log-file="<%= @trace_log_file %>" #trace log file
-<%- end -%>
-<%- if @check_export_permission_nfs_clone -%>
-check-export-permission-nfs-clone="<%= @check_export_permission_nfs_clone %>" #Checks if the host has nfs export permissions for resource being connected !!!!! NEU für C-MODE
-<%- end -%>
