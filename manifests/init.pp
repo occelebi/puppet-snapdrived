@@ -152,6 +152,8 @@ class snapdrived (
     } else {
       $use_service_provider = undef
     }
+  } else {
+    $use_service_provider = $service_provider
   }
 
 
