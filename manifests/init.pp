@@ -132,9 +132,21 @@ class snapdrived (
   $snapcreate_check_nonpersistent_nfs        = undef,
 ){
 
-  anchor { 'snapdrived::begin': } ->
-  class { '::snapdrived::install': } ->
-  class { '::snapdrived::config': } ~>
-  class { '::snapdrived::service': } ->
-  anchor { 'snapdrived::end': }
+  package { 'netapp.snapdrive':
+    ensure => installed,
+  }
+
+
+  file { '/opt/NetApp/snapdrive/snapdrive.conf':
+    content => template('snapdrived/snapdrive.conf.erb'),
+    mode    => '0644',
+    require => Package['netapp.snapdrive'],
+  }
+
+  service { 'snapdrived':
+    ensure    => running,
+    enable    => true,
+    subscribe => File['/opt/NetApp/snapdrive/snapdrive.conf'],
+  }
+
 }
