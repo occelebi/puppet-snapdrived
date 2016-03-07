@@ -16,8 +16,8 @@
 #     -- Also remember to restart the snapdrive daemon by issuing 'snapdrived restart'
 #
 #
-<%- if @PATH -%>
-PATH="<%= @PATH %>" #toolset search path
+<%- if @path -%>
+PATH="<%= @path %>" #toolset search path
 <%- end -%>
 <%- if @all_access_if_rbac_unspecified -%>
 all-access-if-rbac-unspecified="<%= @all_access_if_rbac_unspecified %>" #Allows access to all filer operations if the RBAC permissions file is missing in filer volume

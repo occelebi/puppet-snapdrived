@@ -13,7 +13,7 @@
 # Copyright 2016 Basler Versicherung
 #
 class snapdrived (
-  $PATH                                      = undef,
+  $path                                      = undef,
   $all_access_if_rbac_unspecified            = undef,
   $allow_partial_clone_connect               = undef,
   $audit_log_file                            = undef,
