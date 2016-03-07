@@ -13,6 +13,8 @@
 # Copyright 2016 Basler Versicherung
 #
 class snapdrived (
+  $log_dir                                   = undef,
+  $manage_log_dir                            = false,
   $path                                      = undef,
   $all_access_if_rbac_unspecified            = undef,
   $allow_partial_clone_connect               = undef,
@@ -127,6 +129,13 @@ class snapdrived (
 
   package { 'netapp.snapdrive':
     ensure => installed,
+  }
+
+  if ( $manage_log_dir && $log_dir ) {
+    file { $log_dir:
+      ensure => directory,
+      before => Service['snapdrived'],
+    }
   }
 
 
