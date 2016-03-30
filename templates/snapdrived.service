@@ -1,0 +1,12 @@
+[Unit]
+Description=Snapdrive Daemon
+
+[Service]
+EnvironmentFile=/opt/NetApp/snapdrive/bin/env.sh
+ExecStart=/opt/NetApp/snapdrive/bin/snapdrived $START
+ExecStop=/opt/NetApp/snapdrive/bin/snapdrived $STOP
+KillMode=process
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
