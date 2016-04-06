@@ -1,15 +1,18 @@
 {
   "name": "occelebi-snapdrived",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "author": "Onur Cem Celebi",
   "summary": "Netapp snapdrived module",
   "license": "Apache-2.0",
   "operatingsystem_support": [
     {
-    "operatingsystem":"RedHat",
-    "operatingsystemrelease":[ "6" ]
+      "operatingsystem":"RedHat",
+      "operatingsystemrelease":[ 
+        "6",
+        "7"
+      ]
     }
-   ],
+  ],
   "source": "https://github.com/occelebi/puppet-snapdrived",
   "project_page": "https://github.com/occelebi/puppet-snapdrived",
   "issues_url": "https://github.com/occelebi/puppet-snapdrived/issues",

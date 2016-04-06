@@ -13,7 +13,9 @@
 # Copyright 2016 Basler Versicherung
 #
 class snapdrived (
-  $PATH                                      = undef,
+  $log_dir                                   = undef,
+  $manage_log_dir                            = false,
+  $path                                      = undef,
   $all_access_if_rbac_unspecified            = undef,
   $allow_partial_clone_connect               = undef,
   $audit_log_file                            = undef,
@@ -122,19 +124,51 @@ class snapdrived (
   $volume_destroy_retry                      = undef,
   $volume_destroy_retry_sleep                = undef,
   $volume_offline_retry                      = undef,
-  $audit_log_file                            = undef,
-  $trace_log_file                            = undef,
-  $recovery_log_file                         = undef,
-  $client_trace_log_file                     = undef,
-  $daemon_trace_log_file                     = undef,
-  $ping_interfaces_with_same_octet           = undef,
-  $check_export_permission_nfs_clone         = undef,
-  $snapcreate_check_nonpersistent_nfs        = undef,
+  $volume_offline_retry_sleep                = undef,
 ){
 
-  anchor { 'snapdrived::begin': } ->
-  class { '::snapdrived::install': } ->
-  class { '::snapdrived::config': } ~>
-  class { '::snapdrived::service': } ->
-  anchor { 'snapdrived::end': }
+  package { 'netapp.snapdrive':
+    ensure => installed,
+  }
+
+  # Create log file directory if we specify manage_log_dir
+  #
+  if ( $manage_log_dir and $log_dir ) {
+    file { $log_dir:
+      ensure => directory,
+      before => Service['snapdrived'],
+    }
+  }
+
+  file { '/opt/NetApp/snapdrive/snapdrive.conf':
+    content => template('snapdrived/snapdrive.conf.erb'),
+    mode    => '0644',
+    require => Package['netapp.snapdrive'],
+  }
+
+  service { 'snapdrived':
+    ensure    => running,
+    enable    => true,
+    subscribe => File['/opt/NetApp/snapdrive/snapdrive.conf'],
+  }
+
+  case $::operatingsystem {
+    'RedHat': {
+      if versioncmp($::operatingsystemmajrelease, 7) >= 0 {
+
+        # Create trigger script for unit file
+        file { '/opt/NetApp/snapdrive/bin/env.sh':
+          content => template('snapdrived/env.sh'),
+          mode    => '0644',
+        }
+
+        # Create unit file for systemd based system
+        file { '/usr/lib/systemd/system/snapdrived.service':
+          content => template('snapdrived/snapdrived.service'),
+          mode    => '0644',
+        }
+      }
+    }
+    default: {}
+  }
 }

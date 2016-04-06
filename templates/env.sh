@@ -1,0 +1,4 @@
+#!/bin/sh
+LVM_SUPPRESS_FD_WARNINGS=1
+START=start
+STOP=stop
