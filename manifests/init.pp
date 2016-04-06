@@ -129,7 +129,7 @@ class snapdrived (
   $volume_offline_retry_sleep                = undef,
 ){
 
-  package { $package_name,
+  package { $package_name:
     ensure => $package_version,
   }
 
