@@ -13,6 +13,8 @@
 # Copyright 2016 Basler Versicherung
 #
 class snapdrived (
+  $package_name                              = 'netapp.snapdrive',
+  $package_version                           = 'installed',
   $log_dir                                   = undef,
   $manage_log_dir                            = false,
   $path                                      = undef,
@@ -127,8 +129,8 @@ class snapdrived (
   $volume_offline_retry_sleep                = undef,
 ){
 
-  package { 'netapp.snapdrive':
-    ensure => installed,
+  package { $package_name:
+    ensure => $package_version,
   }
 
   # Create log file directory if we specify manage_log_dir
