@@ -165,9 +165,9 @@ class snapdrived (
         }
 
         # Create unit file for systemd based system
-        file { '/usr/lib/systemd/system/snapdrived.service':
+        systemd::unit_file { 'snapdrived.service':
           content => template('snapdrived/snapdrived.service'),
-          mode    => '0644',
+          before  => Service['snapdrived'],
         }
       }
     }
